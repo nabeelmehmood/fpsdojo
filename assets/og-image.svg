@@ -69,7 +69,7 @@
   </g>
 
   <!-- Copy. -->
-  <text x="80" y="232" fill="#ffffff" font-family="Arial Black, Segoe UI Black, Impact, sans-serif" font-size="84" font-weight="900" letter-spacing="8">GRIDSHOT</text>
+  <text x="80" y="232" fill="#ffffff" font-family="Arial Black, Segoe UI Black, Impact, sans-serif" font-size="84" font-weight="900" letter-spacing="8">FPS DOJO</text>
   <text x="82" y="296" fill="#d7dde7" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="600">Free browser aim trainer</text>
   <text x="82" y="340" fill="#d7dde7" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="600">for FPS warmups</text>
 
@@ -84,5 +84,5 @@
 
   <!--BADGES-->
 
-  <text x="80" y="582" fill="#8b94a7" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">nabeelmehmood.github.io/gridshot</text>
+  <text x="80" y="582" fill="#8b94a7" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">nabeelmehmood.github.io/fpsdojo</text>
 </svg>

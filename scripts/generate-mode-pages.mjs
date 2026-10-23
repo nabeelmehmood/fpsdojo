@@ -21,8 +21,8 @@ const { RANK_THRESHOLDS, TIERS } = await import('../src/game/ranks.js');
 const { GAME_DURATION, MAX_STREAK_BONUS, POINTS, STREAK_STEP } = await import('../src/game/scoring.js');
 const { THEME_IDS } = await import('../src/themes.js');
 
-const SITE = 'https://nabeelmehmood.github.io/gridshot/';
-const BASE = '/gridshot/';
+const SITE = 'https://nabeelmehmood.github.io/fpsdojo/';
+const BASE = '/fpsdojo/';
 const OUT = new URL('../public/modes/', import.meta.url);
 const today = new Date().toISOString().slice(0, 10);
 
@@ -122,7 +122,7 @@ function page(id) {
   const mode = MODES[id];
   const content = CONTENT[id];
   const url = `${SITE}modes/${id}/`;
-  const title = `${mode.name} – free ${content.keyword} in your browser | Gridshot`;
+  const title = `${mode.name} – free ${content.keyword} in your browser | FPS Dojo`;
   const description = `Play ${mode.name} free in your browser. ${mode.description} No download, no sign-up.`;
   const thresholds = RANK_THRESHOLDS[id];
   const ranks = TIERS.map((tier, index) => ({ ...tier, from: index === 0 ? 1 : thresholds[index - 1] }));
@@ -140,7 +140,7 @@ function page(id) {
     <meta name="color-scheme" content="dark" />
     <link rel="canonical" href="${url}" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Gridshot" />
+    <meta property="og:site_name" content="FPS Dojo" />
     <meta property="og:url" content="${url}" />
     <meta property="og:title" content="${escape(title)}" />
     <meta property="og:description" content="${escape(description)}" />
@@ -159,11 +159,11 @@ function page(id) {
         name: title,
         url,
         description,
-        isPartOf: { '@type': 'WebSite', name: 'Gridshot', url: SITE },
+        isPartOf: { '@type': 'WebSite', name: 'FPS Dojo', url: SITE },
         breadcrumb: {
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Gridshot', item: SITE },
+            { '@type': 'ListItem', position: 1, name: 'FPS Dojo', item: SITE },
             { '@type': 'ListItem', position: 2, name: mode.name, item: url }
           ]
         }
@@ -199,7 +199,7 @@ function page(id) {
   </head>
   <body>
     <main>
-      <nav class="crumb" aria-label="Breadcrumb"><a href="${BASE}">Gridshot</a> / ${escape(mode.name)}</nav>
+      <nav class="crumb" aria-label="Breadcrumb"><a href="${BASE}">FPS Dojo</a> / ${escape(mode.name)}</nav>
       <header>
         <h1>${escape(mode.name)}: ${escape(content.keyword)}</h1>
       </header>
@@ -243,7 +243,7 @@ function page(id) {
         </ul>
       </section>
 
-      <footer>Gridshot is a free browser aim trainer with ${MODE_IDS.length} modes, ${THEME_IDS.length} themes and leaderboards. <a href="${BASE}">Play now</a>.</footer>
+      <footer>FPS Dojo is a free browser aim trainer with ${MODE_IDS.length} modes, ${THEME_IDS.length} themes and leaderboards. <a href="${BASE}">Play now</a>.</footer>
     </main>
   </body>
 </html>

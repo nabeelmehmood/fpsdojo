@@ -1,8 +1,9 @@
-# Gridshot
+# FPS Dojo
 
 A browser aim trainer for FPS warmups. Every run is 60 seconds; hits are +10, misses -10, and every 10 hits in a row adds +1 per hit (up to ×1.5).
 
-Play it at https://nabeelmehmood.github.io/gridshot/
+Play it at https://nabeelmehmood.github.io/fpsdojo/ (formerly Gridshot at `/gridshot/`, which now
+redirects here; see [Old address](#old-address-gridshot)).
 
 ## Modes
 
@@ -217,9 +218,34 @@ build.
 ## Mode pages (search)
 
 `npm run pages` writes a page per mode to `public/modes/<mode>/` and rebuilds `public/sitemap.xml`;
-it also runs automatically before every build. Each page links to `/gridshot/?mode=<mode>`, which
+it also runs automatically before every build. Each page links to `/fpsdojo/?mode=<mode>`, which
 opens the game on that mode. The per-mode text lives in `scripts/generate-mode-pages.mjs`, and the
 script refuses to run until a new mode has its own copy there.
+
+## Old address (/gridshot/)
+
+The site was called Gridshot and lived at https://nabeelmehmood.github.io/gridshot/. That address
+now only redirects: the old `gridshot` repo's Pages holds a small redirect site built by
+`scripts/generate-redirect-site.mjs`, and this repo (`fpsdojo`) holds the app.
+
+- The home page and each mode page forward to the same page under `/fpsdojo/`, keeping `?mode=`
+  and any `#part`. They carry a canonical link and an instant meta refresh, which search engines
+  treat as a permanent move. Any other old path goes through `404.html` to the same path here.
+- Its `sw.js` replaces the old service worker for returning players: it deletes the old cache and
+  unregisters itself.
+- Both addresses are on `nabeelmehmood.github.io`, so players keep their username, bests, history
+  and settings, and the leaderboard functions already accept the origin. Moving to a custom
+  domain later changes the origin: saved data would then need handing over, and the domain added
+  to `cors` in `functions/index.js`.
+
+Republish it (only needed if a mode is added or the redirect changes):
+
+```bash
+npm run deploy:redirect
+```
+
+It pushes `dist-redirect/` to the `gridshot` repo's `gh-pages` branch, so that repo must still exist.
+Keep it up: old links, bookmarks and search results point at it.
 
 ## Monthly check
 
@@ -232,7 +258,7 @@ Five minutes, once a month, so a surprise never gets as far as the $5 kill switc
 | Firebase console → Functions → Usage | Invocations per day | A few per visit: a leaderboard load on arrival and per board opened, a run start per run, a save now and then | Sudden spikes with no matching visits in Umami: someone is scripting the API; the rate limits cap it, but consider App Check |
 | Firebase console → Firestore → Usage | Reads and writes per day | Far under the free 50K reads / 20K writes | Close to the limit: raise `LEADERBOARD_CACHE_MS` in `functions/index.js` |
 | Firestore → Data → `LeaderboardScores` | The top of each mode | Believable scores | Junk names or impossible scores: `npm run remove-score -- <name>` |
-| Umami → Gridshot → Events | Events this month | Well under 100K (the free plan's limit) | Near the limit: drop the noisiest events (`mode_select`, `theme_select`) |
+| Umami → FPS Dojo → Events | Events this month | Well under 100K (the free plan's limit) | Near the limit: drop the noisiest events (`mode_select`, `theme_select`) |
 
 The `Runs` collection grows by one small document per run. It's harmless, but if it ever reaches the
 tens of thousands, clear it the same way as after a scoring change (see Removing a leaderboard

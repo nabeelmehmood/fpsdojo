@@ -1,8 +1,8 @@
-// Makes Gridshot installable and quick to reopen. Pages are network-first, so a deploy shows up on the
+// Makes FPS Dojo installable and quick to reopen. Pages are network-first, so a deploy shows up on the
 // next load; the hashed files under /assets/ never change, so they are served from the cache.
-// Only same-origin GETs under /gridshot/ are handled; the leaderboard API always goes to the network.
-const CACHE = 'gridshot-v1';
-const BASE = '/gridshot/';
+// Only same-origin GETs under /fpsdojo/ are handled; the leaderboard API always goes to the network.
+const CACHE = 'fpsdojo-v1';
+const BASE = '/fpsdojo/';
 
 self.addEventListener('install', () => self.skipWaiting());
 

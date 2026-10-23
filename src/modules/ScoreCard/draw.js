@@ -7,7 +7,7 @@ const DISPLAY = 'Rajdhani, "Arial Narrow", sans-serif';
 const BODY = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
 const TEXT = '#e8ecf3';
 const MUTED = '#8b94a7';
-const SITE = 'nabeelmehmood.github.io/gridshot';
+const SITE = 'nabeelmehmood.github.io/fpsdojo';
 
 function glow(ctx, x, y, radius, color) {
   const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
@@ -98,7 +98,7 @@ export async function renderScoreCard({ score, modeName, accuracy, bestStreak, h
 
   target(ctx, 930, 300, theme.targetColor, accent);
 
-  text(ctx, 'GRIDSHOT', 80, 112, { size: 46, spacing: 10 });
+  text(ctx, 'FPS DOJO', 80, 112, { size: 46, spacing: 10 });
   text(ctx, modeName.toUpperCase(), 80, 168, { size: 36, color: accent, spacing: 4 });
   text(ctx, String(score), 70, 372, { size: 210 });
   if (newBest) badge(ctx, 'NEW PERSONAL BEST', 84, 398, accent, accentText);

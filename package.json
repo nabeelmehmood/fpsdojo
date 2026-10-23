@@ -1,10 +1,10 @@
 {
-  "name": "gridshot",
+  "name": "fpsdojo",
   "version": "1.1.0",
   "private": true,
   "type": "module",
-  "homepage": "https://nabeelmehmood.github.io/gridshot",
-  "description": "Gridshot - browser aim trainer for FPS warmups",
+  "homepage": "https://nabeelmehmood.github.io/fpsdojo",
+  "description": "FPS Dojo - browser aim trainer for FPS warmups",
   "keywords": [
     "aim trainer",
     "fps",
@@ -20,6 +20,8 @@
     "lint": "eslint .",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
+    "redirect": "node scripts/generate-redirect-site.mjs",
+    "deploy:redirect": "npm run pages && npm run redirect && gh-pages -d dist-redirect --nojekyll -r https://github.com/nabeelmehmood/gridshot.git",
     "assets": "node scripts/generate-assets.mjs",
     "remove-score": "node scripts/remove-score.mjs",
     "pages": "node scripts/generate-mode-pages.mjs",

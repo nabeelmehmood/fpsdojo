@@ -6,7 +6,7 @@ import { THEMES } from '../../themes';
 import { useGame } from '../Context';
 import styles from './index.module.css';
 
-export const SITE_URL = 'https://nabeelmehmood.github.io/gridshot/';
+export const SITE_URL = 'https://nabeelmehmood.github.io/fpsdojo/';
 
 // Google Form for feedback and bug reports.
 const FEEDBACK_FORM_URL =
@@ -40,7 +40,7 @@ function feedbackUrl(gameInfo, topic) {
   return `${FEEDBACK_FORM_URL}?${params}`;
 }
 
-const DEFAULT_TEXT = 'Gridshot is a free browser aim trainer for FPS warmups. 8 modes, 9 themes and leaderboards.';
+const DEFAULT_TEXT = 'FPS Dojo is a free browser aim trainer for FPS warmups. 8 modes, 9 themes and leaderboards.';
 
 const canNativeShare = () => typeof navigator !== 'undefined' && typeof navigator.share === 'function';
 
@@ -74,7 +74,7 @@ export function useCopyLink(where) {
 // Dismissing the share sheet rejects; nothing to report.
 export function nativeShare(text, where) {
   track('share', { where, network: 'native' });
-  return navigator.share({ title: 'Gridshot – Free Aim Trainer', text, url: SITE_URL }).catch(() => {});
+  return navigator.share({ title: 'FPS Dojo – Free Aim Trainer', text, url: SITE_URL }).catch(() => {});
 }
 
 // Row of share targets. `text` is the message posted with the link (a score, or the default pitch).
@@ -107,7 +107,7 @@ export function ShareButtons({ text = DEFAULT_TEXT, where = 'menu' }) {
 }
 
 export function scoreShareText(score, modeName) {
-  return `I scored ${score} in Gridshot (${modeName}). Can you beat it?`;
+  return `I scored ${score} in FPS Dojo (${modeName}). Can you beat it?`;
 }
 
 export function ShareAndFeedback() {
@@ -118,14 +118,14 @@ export function ShareAndFeedback() {
     <div className={styles.shareAndFeedback}>
       <section aria-labelledby="share-title" className={styles.section}>
         <h3 id="share-title" className={styles.heading}>
-          Share Gridshot
+          Share FPS Dojo
         </h3>
         <ShareButtons />
       </section>
       {canInstall && (
         <section aria-labelledby="install-title" className={styles.section}>
           <h3 id="install-title" className={styles.heading}>
-            Install Gridshot
+            Install FPS Dojo
           </h3>
           <p className={styles.text}>Open it from your desktop or taskbar, in its own window, before a session.</p>
           <div className={styles.shareRow}>

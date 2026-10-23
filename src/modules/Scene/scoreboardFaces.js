@@ -284,7 +284,7 @@ function billboard(ctx, w, h) {
   ctx.fillRect(0, 0, w, h);
   ctx.fillStyle = 'rgba(255, 255, 255, 0.045)';
   for (let y = 0; y < h; y += 6) ctx.fillRect(0, y, w, 2);
-  text(ctx, 'GRIDSHOT · LIVE', w - 40, h - 26, { size: 26, color: 'rgba(34, 230, 255, 0.7)', align: 'right', spacing: 6 });
+  text(ctx, 'FPS DOJO · LIVE', w - 40, h - 26, { size: 26, color: 'rgba(34, 230, 255, 0.7)', align: 'right', spacing: 6 });
 }
 
 function hologram(ctx, w, h) {

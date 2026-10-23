@@ -97,7 +97,7 @@ const COUNTDOWN_STEP_MS = 600;
 
 // New key on purpose: bests from before run tokens ('topScore') can't be submitted, so they
 // start over together with the leaderboard.
-// A link like /gridshot/?mode=skeet (from the mode pages) opens on that mode.
+// A link like /fpsdojo/?mode=skeet (from the mode pages) opens on that mode.
 const linkedMode = () => {
   const mode = new URLSearchParams(window.location.search).get('mode');
   return MODES[mode] ? mode : null;

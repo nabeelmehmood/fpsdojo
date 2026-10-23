@@ -429,7 +429,7 @@
   font-size: 15px;
 }
 
-/* Phones and tablets: what Gridshot needs instead of a Start button. */
+/* Phones and tablets: what FPS Dojo needs instead of a Start button. */
 .playOnComputer {
   display: flex;
   flex-direction: column;

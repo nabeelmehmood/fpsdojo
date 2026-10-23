@@ -28,7 +28,7 @@ function ScoreCardDialog({ run, onClose }) {
   const dialogRef = useRef(null);
   const [card, setCard] = useState(null);
   const [copied, setCopied] = useState(false);
-  const fileName = `gridshot-${modeName.toLowerCase().replace(/\W+/g, '-')}-${score}.png`;
+  const fileName = `fpsdojo-${modeName.toLowerCase().replace(/\W+/g, '-')}-${score}.png`;
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -69,7 +69,7 @@ function ScoreCardDialog({ run, onClose }) {
   const share = () => {
     track('share', { where: 'results', network: 'image_share' });
     // Dismissing the share sheet rejects; nothing to report.
-    navigator.share({ files: [card.file], title: 'Gridshot score' }).catch(() => {});
+    navigator.share({ files: [card.file], title: 'FPS Dojo score' }).catch(() => {});
   };
 
   const handleCancel = event => {
@@ -94,7 +94,7 @@ function ScoreCardDialog({ run, onClose }) {
         </header>
         <div className={styles.preview}>
           {card ? (
-            <img src={card.url} alt={`Gridshot ${modeName} score card: ${score}`} width="1200" height="630" />
+            <img src={card.url} alt={`FPS Dojo ${modeName} score card: ${score}`} width="1200" height="630" />
           ) : (
             <span className={styles.drawing}>Drawing your card…</span>
           )}

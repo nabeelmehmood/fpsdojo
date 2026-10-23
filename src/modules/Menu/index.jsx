@@ -253,7 +253,7 @@ function MainCard({ onOpenLeaderboard, guide, dimmed, onStarted }) {
   return (
     <main className={`${styles.card} ${styles.mainCard} ${startStep ? styles.active : ''} ${dimmed ? styles.dimmed : ''}`}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Gridshot</h1>
+        <h1 className={styles.title}>FPS Dojo</h1>
         <p className={styles.tagline}>Aim warmups for FPS games. Every miss costs points.</p>
       </header>
 
@@ -418,7 +418,7 @@ function PlayOnComputer() {
         You&apos;re looking at a preview
       </h2>
       <p className={styles.playOnComputerText}>
-        Gridshot is a <strong>mouse</strong> aim trainer, so it can&apos;t be played on a phone or tablet. Send
+        FPS Dojo is a <strong>mouse</strong> aim trainer, so it can&apos;t be played on a phone or tablet. Send
         yourself the link and play on a computer.
       </p>
       {canShare && (

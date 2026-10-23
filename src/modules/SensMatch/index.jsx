@@ -4,7 +4,7 @@ import { cmPer360, degreesPerCount, DPI_LIMITS, gameById, GAMES, SENS_LIMITS } f
 import { useGame } from '../Context';
 import styles from './index.module.css';
 
-// Settings control: copy another game's sensitivity so Gridshot turns exactly the same amount per
+// Settings control: copy another game's sensitivity so FPS Dojo turns exactly the same amount per
 // mouse movement. While matched, it replaces the sensitivity slider.
 export default function SensMatch() {
   const { settings, setSettings } = useGame();
