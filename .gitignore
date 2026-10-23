@@ -1,0 +1,6 @@
+build
+dist
+dist-redirect
+node_modules
+*.log
+.env*
