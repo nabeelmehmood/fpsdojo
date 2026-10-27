@@ -1,5 +1,5 @@
 import {
-  cloudPaperTexture,
+  creamPaperTexture,
   ginghamTexture,
   hexPanelTexture,
   pixelBoardTexture,
@@ -20,7 +20,7 @@ const FRAME = 0.3;
 // Repeats are tuned to the board's 21.2 × 8.8 size so features keep a natural scale.
 const TEXTURES = {
   wood: () => woodBoardTexture([3, 2]),
-  cloudPaper: () => cloudPaperTexture([1, 1]),
+  creamPaper: () => creamPaperTexture([1, 1]),
   gingham: () => ginghamTexture([12, 5]),
   tiles: () => tileTexture('board', '#d7eef8', '#a9d0e2', [12, 5]),
   hex: () => hexPanelTexture([7, 3]),
@@ -29,7 +29,8 @@ const TEXTURES = {
   pixelBoard: () => pixelBoardTexture([21.2, 8.8])
 };
 
-export default function Backdrop({ texture, color = '#ffffff', frame, opacity = 1, glowFrame = false }) {
+// `flat` draws the board unlit and without tone mapping, so pale boards keep their exact colour.
+export default function Backdrop({ texture, color = '#ffffff', frame, opacity = 1, glowFrame = false, flat = false }) {
   const map = texture ? TEXTURES[texture]() : null;
   const frameMaterial = glowFrame ? (
     <meshBasicMaterial color={frame} toneMapped={false} />
@@ -47,17 +48,21 @@ export default function Backdrop({ texture, color = '#ffffff', frame, opacity = 
     <group position={[0, CENTER_Y, Z]}>
       <mesh receiveShadow>
         <planeGeometry args={[WIDTH, HEIGHT]} />
-        {/* Slightly self-lit so the board reads as its own colour whatever the scene lighting. */}
-        <meshStandardMaterial
-          map={map}
-          color={color}
-          emissive={color}
-          emissiveMap={map}
-          emissiveIntensity={0.35}
-          roughness={0.9}
-          transparent={opacity < 1}
-          opacity={opacity}
-        />
+        {flat ? (
+          <meshBasicMaterial map={map} color={color} transparent={opacity < 1} opacity={opacity} toneMapped={false} />
+        ) : (
+          // Slightly self-lit so the board reads as its own colour whatever the scene lighting.
+          <meshStandardMaterial
+            map={map}
+            color={color}
+            emissive={color}
+            emissiveMap={map}
+            emissiveIntensity={0.35}
+            roughness={0.9}
+            transparent={opacity < 1}
+            opacity={opacity}
+          />
+        )}
       </mesh>
       {bars.map(([x, y, w, h]) => (
         <mesh key={`${x}-${y}`} position={[x, y, 0.05]}>

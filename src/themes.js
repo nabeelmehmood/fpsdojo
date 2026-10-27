@@ -20,24 +20,27 @@ export const THEMES = {
   },
   daydream: {
     id: 'daydream',
-    swatch: ['#a78bfa', '#ffd9c2', '#7fd7e0'],
+    swatch: ['#ebe7f2', '#f6d58a', '#cfe6d3'],
     name: 'Daydream',
-    description: 'A floating island above a sea of clouds, with feathers on the breeze.',
+    description: 'A soft storybook sky: pastel clouds, drifting confetti and little friends at the edges.',
     targetStyle: 'pearl',
     targetColor: '#7fd0e6',
     haloColor: '#ffc4e6',
     outline: '#5b3f86',
     missColor: '#6b4a7a',
-    backdrop: { texture: 'cloudPaper', frame: '#ffffff', opacity: 0.96 },
+    backdrop: { texture: 'creamPaper', frame: '#ecdcc7', flat: true, glowFrame: true },
     halo: true,
-    ambient: 'feathers',
+    // One field of particles per preset (Scene/ambient.js).
+    ambient: ['confetti', 'sparkles'],
     ui: { accent: '#f6a6c9', accentText: '#3a1328', panel: 'rgba(46, 30, 62, 0.86)' }
   },
   kawaii: {
     id: 'kawaii',
     swatch: ['#ff9ac9', '#fff3a0', '#9ff0b0'],
     name: 'Kawaii',
-    description: 'Pastel skies, a rainbow, smiling clouds and lollipop trees.',
+    description: 'Candy land where everything smiles: a rainbow, a happy sun, a giant cupcake and ice cream.',
+    // Purple with a little face (eyes, blush, smile) on the side facing you.
+    targetStyle: 'kawaii',
     targetColor: '#7c3aed',
     outline: '#2b0f57',
     missColor: '#c2417a',

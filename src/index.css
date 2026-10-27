@@ -80,6 +80,11 @@ button:disabled {
   background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.35) 100%);
 }
 
+/* A black edge greys a cream scene; Daydream gets a faint warm one. */
+:root[data-theme='daydream'] .vignette {
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(150, 120, 90, 0.12) 100%);
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;

@@ -167,7 +167,7 @@ export default function Scene() {
         pace={paceVsBest(game)}
         best={bestStreak}
       />
-      {settings.effects && theme.ambient && <Ambient key={theme.ambient} preset={theme.ambient} />}
+      {settings.effects && [].concat(theme.ambient ?? []).map(preset => <Ambient key={preset} preset={preset} />)}
       <Effects ref={effectsRef} />
       <ReadySignal />
       <LookControls

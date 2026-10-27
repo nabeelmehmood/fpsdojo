@@ -64,24 +64,6 @@ export const heartTexture = () =>
     })
   );
 
-export const featherTexture = () =>
-  cached('feather', [1, 1], () =>
-    drawTexture(64, 64, ctx => {
-      ctx.translate(32, 32);
-      ctx.rotate(-0.7);
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
-      ctx.beginPath();
-      ctx.ellipse(0, 0, 9, 26, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(180,160,200,0.9)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(0, -26);
-      ctx.lineTo(0, 30);
-      ctx.stroke();
-    })
-  );
-
 // Vertical gradient for sky domes; stops run top (0) to bottom (1).
 export const gradientTexture = (key, stops) =>
   cached(`gradient-${key}`, [1, 1], () =>
@@ -496,33 +478,6 @@ export const woodBoardTexture = repeat =>
     })
   );
 
-// Watercolour paper: a lavender-to-peach wash with soft cloud blooms and paper grain.
-export const cloudPaperTexture = repeat =>
-  cached('cloud-paper', repeat, () =>
-    drawTexture(512, 256, (ctx, w, h) => {
-      const rand = seeded(103);
-      const wash = ctx.createLinearGradient(0, 0, 0, h);
-      wash.addColorStop(0, '#e3d4f6');
-      wash.addColorStop(1, '#fbe2d6');
-      ctx.fillStyle = wash;
-      ctx.fillRect(0, 0, w, h);
-      for (let i = 0; i < 26; i++) {
-        const x = rand() * w;
-        const y = rand() * h;
-        const r = 20 + rand() * 60;
-        const bloom = ctx.createRadialGradient(x, y, 0, x, y, r);
-        bloom.addColorStop(0, 'rgba(255, 255, 255, 0.35)');
-        bloom.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        ctx.fillStyle = bloom;
-        ctx.fillRect(x - r, y - r, r * 2, r * 2);
-      }
-      for (let i = 0; i < 2500; i++) {
-        ctx.fillStyle = rand() < 0.5 ? 'rgba(120, 90, 140, 0.05)' : 'rgba(255, 255, 255, 0.12)';
-        ctx.fillRect(rand() * w, rand() * h, 1.5, 1.5);
-      }
-    })
-  );
-
 // Pastel gingham with tiny white polka dots.
 export const ginghamTexture = repeat =>
   cached('gingham', repeat, () =>
@@ -790,3 +745,106 @@ export const pixelDotTexture = () =>
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, 4, 4);
   });
+
+// One-off illustration drawn on a canvas (see storybook.js), cached by key.
+export const illustrationTexture = (key, size, draw) => cached(`illustration-${key}`, [1, 1], () => drawTexture(size[0], size[1], draw));
+
+// Cream paper for the Daydream board: warm off-white with faint pastel washes and flecks.
+export const creamPaperTexture = repeat =>
+  cached('cream-paper', repeat, () =>
+    drawTexture(512, 256, (ctx, w, h) => {
+      const rand = seeded(211);
+      ctx.fillStyle = '#fcf8ef';
+      ctx.fillRect(0, 0, w, h);
+      const washes = ['rgba(207, 230, 211, 0.35)', 'rgba(246, 220, 205, 0.35)', 'rgba(226, 220, 239, 0.35)'];
+      for (let i = 0; i < 9; i++) {
+        const x = rand() * w;
+        const y = rand() * h;
+        const r = 60 + rand() * 90;
+        const wash = ctx.createRadialGradient(x, y, 0, x, y, r);
+        wash.addColorStop(0, washes[i % washes.length]);
+        wash.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = wash;
+        ctx.fillRect(0, 0, w, h);
+      }
+      for (let i = 0; i < 1600; i++) {
+        ctx.fillStyle = `rgba(150, 130, 110, ${rand() * 0.05})`;
+        ctx.fillRect(rand() * w, rand() * h, 1.5, 1.5);
+      }
+    })
+  );
+
+// Cream floor with soft pastel cloud shadows lying on it.
+export const cloudFloorTexture = repeat =>
+  cached('cloud-floor', repeat, () =>
+    drawTexture(512, 512, (ctx, w) => {
+      const rand = seeded(223);
+      ctx.fillStyle = '#f7f1e5';
+      ctx.fillRect(0, 0, w, w);
+      const tints = ['rgba(207, 230, 211, 0.3)', 'rgba(246, 220, 205, 0.3)', 'rgba(226, 220, 239, 0.3)'];
+      for (let i = 0; i < 4; i++) {
+        const x = rand() * w;
+        const y = rand() * w;
+        ctx.fillStyle = tints[i % tints.length];
+        ctx.beginPath();
+        for (let j = 0; j < 4; j++) {
+          const cx = x + (j - 1.5) * 26;
+          const cy = y + (j % 2 ? -8 : 6);
+          ctx.moveTo(cx + 34, cy);
+          ctx.arc(cx, cy, 34, 0, Math.PI * 2);
+        }
+        ctx.fill();
+      }
+      const dots = ['#f2a685', '#f3cf72', '#b8a3dd', '#9fcf9c', '#94c3df'];
+      for (let i = 0; i < 40; i++) {
+        ctx.fillStyle = dots[i % dots.length];
+        ctx.globalAlpha = 0.4;
+        ctx.beginPath();
+        ctx.arc(rand() * w, rand() * w, 2 + rand() * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    })
+  );
+
+// Four-pointed sparkle for particles; tinted per particle.
+export const sparkleTexture = () =>
+  cached('sparkle', [1, 1], () =>
+    drawTexture(64, 64, ctx => {
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.moveTo(32, 2);
+      ctx.quadraticCurveTo(35, 29, 62, 32);
+      ctx.quadraticCurveTo(35, 35, 32, 62);
+      ctx.quadraticCurveTo(29, 35, 2, 32);
+      ctx.quadraticCurveTo(29, 29, 32, 2);
+      ctx.fill();
+    })
+  );
+
+export const waffleTexture = repeat =>
+  cached('waffle', repeat, () =>
+    drawTexture(64, 64, (ctx, w) => {
+      ctx.fillStyle = '#f2c27f';
+      ctx.fillRect(0, 0, w, w);
+      ctx.strokeStyle = '#d99b55';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(w, w);
+      ctx.moveTo(w, 0);
+      ctx.lineTo(0, w);
+      ctx.stroke();
+    })
+  );
+
+// Pleated cupcake wrapper: alternating pastel stripes.
+export const wrapperTexture = (key, a, b, repeat) =>
+  cached(`wrapper-${key}`, repeat, () =>
+    drawTexture(64, 16, (ctx, w, h) => {
+      ctx.fillStyle = a;
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = b;
+      ctx.fillRect(w / 2, 0, w / 2, h);
+    })
+  );

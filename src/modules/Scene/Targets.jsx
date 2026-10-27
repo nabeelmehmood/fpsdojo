@@ -92,6 +92,44 @@ function NeonRings({ radius, color }) {
   );
 }
 
+// Kawaii: shiny eyes, blush and a smile on the side facing the player. Decoration only: it never
+// takes the hit, so the hitbox is the same plain sphere as every other style.
+function TargetFace({ radius }) {
+  const surface = (x, y) => Math.sqrt(Math.max(0, radius ** 2 - x ** 2 - y ** 2));
+  const eyes = [-0.3, 0.3].map(x => [x * radius, 0.14 * radius]);
+  const cheeks = [-0.56, 0.56].map(x => [x * radius, -0.1 * radius]);
+  return (
+    <group>
+      {eyes.map(([x, y]) => (
+        <group key={x} position={[x, y, surface(x, y) * 0.95]}>
+          <mesh raycast={noRaycast}>
+            <sphereGeometry args={[radius * 0.15, 12, 8]} />
+            <meshBasicMaterial color="#ffffff" toneMapped={false} />
+          </mesh>
+          <mesh position={[0, -radius * 0.02, radius * 0.08]} raycast={noRaycast}>
+            <sphereGeometry args={[radius * 0.09, 12, 8]} />
+            <meshBasicMaterial color="#1c0b33" toneMapped={false} />
+          </mesh>
+          <mesh position={[radius * 0.03, radius * 0.03, radius * 0.16]} raycast={noRaycast}>
+            <sphereGeometry args={[radius * 0.03, 6, 4]} />
+            <meshBasicMaterial color="#ffffff" toneMapped={false} />
+          </mesh>
+        </group>
+      ))}
+      {cheeks.map(([x, y]) => (
+        <mesh key={x} position={[x, y, surface(x, y) * 0.97]} scale={[1, 0.6, 0.35]} raycast={noRaycast}>
+          <sphereGeometry args={[radius * 0.13, 10, 6]} />
+          <meshBasicMaterial color="#ff9ad5" toneMapped={false} />
+        </mesh>
+      ))}
+      <mesh position={[0, -0.06 * radius, surface(0, -0.16 * radius) * 0.99]} rotation={[0, 0, Math.PI]} raycast={noRaycast}>
+        <torusGeometry args={[radius * 0.12, radius * 0.03, 6, 16, Math.PI]} />
+        <meshBasicMaterial color="#ffffff" toneMapped={false} />
+      </mesh>
+    </group>
+  );
+}
+
 function Shape({ disc, radius, segments = 32 }) {
   return disc ? (
     <cylinderGeometry args={[radius, radius, radius * 0.32, segments]} />
@@ -174,6 +212,7 @@ function Target({ target, radius, color, outline, style, halo, haloColor, disc, 
         )}
       </group>
       {style === 'neon' && <NeonRings radius={radius} color={color} />}
+      {style === 'kawaii' && !disc && <TargetFace radius={radius} />}
       {halo && (
         <sprite scale={radius * 3.4} raycast={noRaycast}>
           <spriteMaterial map={dotTexture()} color={haloColor ?? color} blending={AdditiveBlending} transparent depthWrite={false} opacity={0.55} />

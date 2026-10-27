@@ -1,6 +1,6 @@
 import { Color } from 'three';
 import { ParticleBuffer } from './particles';
-import { dotTexture, featherTexture, heartTexture, pixelDotTexture } from './textures';
+import { dotTexture, heartTexture, pixelDotTexture, sparkleTexture } from './textures';
 
 // motion: 'drift' wanders sideways, 'rise' floats up, 'fall' sinks down. Positions wrap inside bounds.
 const PRESETS = {
@@ -8,9 +8,14 @@ const PRESETS = {
     count: 160, map: dotTexture, size: 0.12, colors: ['#fff6c8', '#ffffff'], alpha: 0.75,
     bounds: [[-25, 25], [-1, 12], [-30, -1]], motion: 'drift', velocity: [0.35, 0.05, 0.1], wobble: 0.4
   },
-  feathers: {
-    count: 45, map: featherTexture, size: 0.5, colors: ['#ffffff', '#fbe7ff'], alpha: 0.85,
-    bounds: [[-22, 22], [-2, 12], [-28, -2]], motion: 'fall', velocity: [0.3, -0.35, 0], wobble: 0.8
+  // Daydream: pastel confetti dots and a few soft sparkles drifting slowly.
+  confetti: {
+    count: 150, map: dotTexture, size: 0.12, colors: ['#f2a685', '#f3cf72', '#b8a3dd', '#9fcf9c', '#94c3df'], alpha: 0.75,
+    bounds: [[-26, 26], [-1, 16], [-34, -2]], motion: 'drift', velocity: [0.08, 0.03, 0.04], wobble: 0.15
+  },
+  sparkles: {
+    count: 40, map: sparkleTexture, size: 0.26, colors: ['#a9cfe6', '#c9b8e8', '#f3cf72'], alpha: 0.8,
+    bounds: [[-26, 26], [-1, 16], [-34, -2]], motion: 'drift', velocity: [0.05, 0.02, 0.03], wobble: 0.1
   },
   hearts: {
     count: 70, map: heartTexture, size: 0.38, colors: ['#ff7eb6', '#ffb3d9', '#c084fc', '#fde68a'], alpha: 0.9,

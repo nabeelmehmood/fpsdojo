@@ -395,9 +395,9 @@ function kawaii(ctx, w, h) {
 function daydream(ctx, w, h) {
   ctx.clearRect(0, 0, w, h);
   const fill = ctx.createLinearGradient(0, 0, 0, h);
-  fill.addColorStop(0, '#ffffff');
-  fill.addColorStop(1, '#e9dcff');
-  cloud(ctx, w, h, fill, 'rgba(200, 170, 255, 0.8)');
+  fill.addColorStop(0, '#fffdf8');
+  fill.addColorStop(1, '#eef3ea');
+  cloud(ctx, w, h, fill, 'rgba(176, 204, 182, 0.8)');
 }
 
 function panel(ctx, w, h, colors) {
